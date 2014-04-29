@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Class="LinqToSqlContextDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="" Member="TestTable1s">
+    <Type Name="TestTable1">
+      <Column Member="Column" Type="System.String" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="" Member="TestTable2s">
+    <Type Name="TestTable2">
+      <Column Member="Column" Type="System.String" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>
