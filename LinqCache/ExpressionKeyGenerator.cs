@@ -15,7 +15,7 @@ namespace LinqCache
 			expression = LocalCollectionExpander.Rewrite(expression);
 
 			// use the string representation of the expression for the cache key
-			string key = expression.ToString();
+			var key = expression.ToString();
 
 			return key;
 		}
@@ -28,11 +28,15 @@ namespace LinqCache
 				{
 					// don't evaluate parameters
 					if (expression.NodeType == ExpressionType.Parameter)
+					{
 						return false;
+					}
 
 					// can't evaluate queries
-					if (typeof(IQueryable).IsAssignableFrom(expression.Type))
+					if (typeof (IQueryable).IsAssignableFrom(expression.Type))
+					{
 						return false;
+					}
 
 					return true;
 				};

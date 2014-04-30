@@ -13,7 +13,7 @@ namespace LinqCache
 		private readonly Container _container;
 		private readonly Invalidator _invalidator;
 
-		public CachedEnumerable(IQueryable<TType> query, Container container, Invalidator invalidator)
+		internal CachedEnumerable(IQueryable<TType> query, Container container, Invalidator invalidator)
 		{
 			ArgumentValidator.IsNotNull(query, "query");
 			ArgumentValidator.IsNotNull(container, "container");

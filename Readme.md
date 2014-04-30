@@ -1,9 +1,15 @@
 LinqCache
 =========
 LinqCache is a simple yet poweful framework for caching LINQ queries. 
-The framework works seamlessly weiter the backing data store is objects, XML, LINQ-to-SQL, Entity Framework, NHibernate or any other LINQ enabled provider.
-The framework is also easy to extend with your own custom cache containers or cache invalidation rules.
+The framework works seamlessly wheter the backing data store is objects, XML, LINQ-to-SQL, Entity Framework, NHibernate or any other LINQ enabled provider. 
+You can also extend the frame work with your own custom cache containers or custom cache invalidation rules.
 
+Install via NuGet
+-----------------
+To install LinqCache, run the following command in the Package Manager Console:
+```
+PM> Install-Package LinqCache
+```
 Examples
 --------
 + Cache LINQ to objects query indefinetly
@@ -44,11 +50,11 @@ customers.Invalidate();
 LinqCacheConfiguration.Container.Clear();
 ```
 
-Supported cache containers
+Supported Cache Containers
 --------------------------
 + MemoryCache, Managed in-process memory cache. (Default)
 
-Supported invalidation rules
+Supported Invalidation Rules
 ----------------------------
 + ManualInvalidator, Items are invalidated manually. (Default)
 + DurationInvalidator, Items are invalidated after a specified duration.
