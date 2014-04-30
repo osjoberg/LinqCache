@@ -1,90 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using LinqCache.Containers;
+using LinqCache.Invalidators;
 
 namespace LinqCache
 {
 	public static class QueryableExtension
 	{
-		public static IEnumerable<TType> AsCached<TType>(this IQueryable<TType> query)
+		public static CachedEnumerable<TType> AsCached<TType>(this IQueryable<TType> query)
 		{
-			return AsCached(query, LinqCacheConfiguration.Default);
+			return AsCached(query, LinqCacheConfiguration.Default.Container, LinqCacheConfiguration.Default.Invalidator);
 		}
 
-		public static IEnumerable<TType> AsCached<TType>(this IQueryable<TType> query, LinqCacheConfiguration configuration)
+		public static CachedEnumerable<TType> AsCached<TType>(this IQueryable<TType> query, Container container)
 		{
-			return new DeferredEnumerable<TType>(() => AsChachedDeferred(query, configuration));
+			return AsCached(query, container, LinqCacheConfiguration.Default.Invalidator);
 		}
 
-		private static IEnumerable<TType> AsChachedDeferred<TType>(IQueryable<TType> query, LinqCacheConfiguration configuration)
+		public static CachedEnumerable<TType> AsCached<TType>(this IQueryable<TType> query, Invalidator invalidator)
 		{
-			if (query == null)
-			{
-				throw new ArgumentNullException("query");
-			}
-
-			if (configuration == null)
-			{
-				throw new ArgumentNullException("configuration");
-			}
-
-			var container = configuration.Container;
-			var invalidation = configuration.Invalidation;
-			var keyGenerator = configuration.KeyGenerator;
-
-			// Get key from query.
-			var key = keyGenerator.GetKey(query.Expression);
-
-			// Query cache.
-			object cachedValue;
-			var isCached = container.Get(key, out cachedValue);
-			if (isCached)
-			{
-				// Return item from cache.
-				invalidation.AfterGet(key, cachedValue);
-				return (IQueryable<TType>) cachedValue;
-			}
-
-			// If not cached, cache item.
-			var value = query.ToArray().AsQueryable();
-
-			// Cache item.
-			if (container.SupportsDurationInvalidation && invalidation.SupportsDuration)
-			{
-				container.Set(key, value, invalidation.Duration);
-			}
-			else
-			{
-				container.Set(key, value);
-			}
-
-			return value.AsQueryable();
+			return AsCached(query, LinqCacheConfiguration.Default.Container, invalidator);
 		}
 
-		public static void Invalidate<TType>(this IQueryable<TType> query)
+		public static CachedEnumerable<TType> AsCached<TType>(this IQueryable<TType> query, Container container, Invalidator invalidator)
 		{
-			Invalidate(query, LinqCacheConfiguration.Default);
-		}
-
-		public static void Invalidate<TType>(this IQueryable<TType> query, LinqCacheConfiguration configuration)
-		{
-			if (query == null)
-			{
-				throw new ArgumentNullException("query");
-			}
-
-			if (configuration == null)
-			{
-				throw new ArgumentNullException("configuration");
-			}
-
-			var container = configuration.Container;
-			var keyGenerator = configuration.KeyGenerator;
-
-			// Get key from query.
-			var key = keyGenerator.GetKey(query.Expression);
-
-			container.Remove(key);
+			return new CachedEnumerable<TType>(query, container, invalidator);
 		}
 	}
 }

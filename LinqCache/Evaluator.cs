@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace LinqCache.KeyGenerators
+namespace LinqCache
 {
 	/// <summary>
 	/// Enables the partial evaluation of queries.

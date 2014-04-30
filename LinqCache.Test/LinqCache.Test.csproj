@@ -64,14 +64,14 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Containers\MemoryCacheContainerTests.cs" />
-    <Compile Include="Invalidations\DateTimeInvalidationTests.cs" />
+    <Compile Include="Invalidators\DateTimeInvalidatorTests.cs" />
     <Compile Include="LinqToSql.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LinqToSql.dbml</DependentUpon>
     </Compile>
     <Compile Include="QueryableExtentionTest.cs" />
-    <Compile Include="Keys\ExpressionKeyGeneratorTests.cs" />
+    <Compile Include="ExpressionKeyGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

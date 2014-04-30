@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace LinqCache.Invalidations
+namespace LinqCache.Invalidators
 {
-	public class DurationInvalidation : Invalidation
+	public class DurationInvalidator : Invalidator
 	{
 		public TimeSpan Invalidate { get; private set; }
 
-		public DurationInvalidation(TimeSpan invalidate)
+		public DurationInvalidator(TimeSpan invalidate)
 		{
 			Duration = invalidate;
 			Invalidate = invalidate;

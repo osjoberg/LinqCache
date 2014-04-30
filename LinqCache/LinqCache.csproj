@@ -44,25 +44,24 @@
   <ItemGroup>
     <Compile Include="Containers\MemoryCacheContainer.cs" />
     <Compile Include="Containers\Container.cs" />
-    <Compile Include="DeferredEnumerator.cs" />
-    <Compile Include="Invalidations\ManualInvalidation.cs" />
-    <Compile Include="Invalidations\SlidingInvalidation.cs" />
-    <Compile Include="Invalidations\DateTimeInvalidation.cs" />
-    <Compile Include="Invalidations\DurationInvalidation.cs" />
-    <Compile Include="Invalidations\Invalidation.cs" />
-    <Compile Include="KeyGenerators\CustomKeyGenerator.cs" />
+    <Compile Include="CachedEnumerable.cs" />
+    <Compile Include="Invalidators\ManualInvalidator.cs" />
+    <Compile Include="Invalidators\SlidingDurationInvalidator.cs" />
+    <Compile Include="Invalidators\DateTimeInvalidator.cs" />
+    <Compile Include="Invalidators\DurationInvalidator.cs" />
+    <Compile Include="Invalidators\Invalidator.cs" />
     <Compile Include="LinqCacheException.cs" />
     <Compile Include="QueryableExtension.cs" />
-    <Compile Include="KeyGenerators\Evaluator.cs" />
-    <Compile Include="KeyGenerators\ExpressionKeyGenerator.cs" />
-    <Compile Include="KeyGenerators\KeyGenerator.cs" />
-    <Compile Include="KeyGenerators\LocalCollectionExpander.cs" />
+    <Compile Include="Evaluator.cs" />
+    <Compile Include="ExpressionKeyGenerator.cs" />
+    <Compile Include="LocalCollectionExpander.cs" />
     <Compile Include="LinqCacheConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LinqCache.snk" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

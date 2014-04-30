@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace LinqCache.Invalidations
+namespace LinqCache.Invalidators
 {
-	public class DateTimeInvalidation : Invalidation
+	public class DateTimeInvalidator : Invalidator
 	{
 		public DateTime Invalidate { get; private set; }
 
-		public DateTimeInvalidation(DateTime invalidate)
+		public DateTimeInvalidator(DateTime invalidate)
 		{
 			Invalidate = invalidate;
 			Duration = invalidate - DateTime.Now;

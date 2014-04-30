@@ -1,24 +1,22 @@
 ﻿using LinqCache.Containers;
-using LinqCache.Invalidations;
-using LinqCache.KeyGenerators;
+using LinqCache.Invalidators;
 
 namespace LinqCache
 {
 	public class LinqCacheConfiguration
 	{
 		private Container _container;
-		private Invalidation _invalidation;
+		private Invalidator _invalidator;
 
 		public static LinqCacheConfiguration Default
 		{
-			get { return new LinqCacheConfiguration(new MemoryCacheContainer(), new ManualInvalidation(), new ExpressionGeneratedKey());   }			
+			get { return new LinqCacheConfiguration(new MemoryCacheContainer(), new ManualInvalidator());   }			
 		}
 
-		public LinqCacheConfiguration(Container container, Invalidation invalidation, KeyGenerator keyGenerator)
+		public LinqCacheConfiguration(Container container, Invalidator invalidator)
 		{
-			Invalidation = invalidation;
+			Invalidator = invalidator;
 			Container = container;
-			KeyGenerator = keyGenerator;
 		}
 
 		public Container Container
@@ -27,20 +25,18 @@ namespace LinqCache
 			set
 			{
 				_container = value;
-				Invalidation.Container = value;
+				Invalidator.Container = value;
 			}
 		}
 
-		public Invalidation Invalidation
+		public Invalidator Invalidator
 		{
-			get { return _invalidation; }
+			get { return _invalidator; }
 			set
 			{
-				_invalidation = value;
-				_invalidation.Container = Container;
+				_invalidator = value;
+				_invalidator.Container = Container;
 			}
 		}
-
-		public KeyGenerator KeyGenerator { get; set; }
 	}
 }

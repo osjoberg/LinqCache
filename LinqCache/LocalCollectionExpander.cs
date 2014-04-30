@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace LinqCache.KeyGenerators
+namespace LinqCache
 {
 	/// <summary>
 	/// Enables cache key support for local collection values.

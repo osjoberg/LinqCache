@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace LinqCache.KeyGenerators
+namespace LinqCache
 {
-	public class ExpressionGeneratedKey : KeyGenerator
+	internal class ExpressionKeyGenerator
 	{
-		public override string GetKey(Expression expression)
+		public string GetKey(Expression expression)
 		{
 			// locally evaluate as much of the query as possible
 			expression = Evaluator.PartialEval(expression, CanBeEvaluatedLocally);

@@ -1,12 +1,12 @@
 ﻿using System;
 using LinqCache.Containers;
 
-namespace LinqCache.Invalidations
+namespace LinqCache.Invalidators
 {
 	/// <summary>
-	/// Abstract base class for cache invalidations.
+	/// Abstract base class for cache invalidators.
 	/// </summary>
-	public abstract class Invalidation
+	public abstract class Invalidator
 	{
 		/// <summary>
 		/// Acccess to container.
