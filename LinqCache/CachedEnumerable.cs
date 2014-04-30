@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,53 +9,50 @@ namespace LinqCache
 	public class CachedEnumerable<TType> : IEnumerable<TType>
 	{
 		private readonly IQueryable<TType> _query;
-		private string _key;
+		private readonly string _key;
 		private readonly Container _container;
 		private readonly Invalidator _invalidator;
 
 		public CachedEnumerable(IQueryable<TType> query, Container container, Invalidator invalidator)
 		{
-			if (query == null)
-			{
-				throw new ArgumentNullException("query");
-			}
+			ArgumentValidator.IsNotNull(query, "query");
+			ArgumentValidator.IsNotNull(container, "container");
+			ArgumentValidator.IsNotNull(invalidator, "invalidator");
 
-			if (container == null)
+			if (invalidator.UsesDuration && !container.SupportsDurationInvalidation)
 			{
-				throw new ArgumentNullException("container");
-			}
-
-			if (invalidator == null)
-			{
-				throw new ArgumentNullException("invalidator");
+				throw LinqCacheException.ContainerDoesNotSupportDuration;
 			}
 
 			_container = container;
 			_query = query;
 			_invalidator = invalidator;
-		}
 
-		public IEnumerator<TType> GetEnumerator()
-		{
 			// Get key from query.
 			var expressionKeyGenerator = new ExpressionKeyGenerator();
 			_key = expressionKeyGenerator.GetKey(_query.Expression);
 
+			_invalidator.OnInit(container, _query, _key);
+		}
+
+		public IEnumerator<TType> GetEnumerator()
+		{		
 			// Query cache.
 			object cachedValue;
 			var isCached = _container.Get(_key, out cachedValue);
 			if (isCached)
 			{
 				// Return item from cache.
-				_invalidator.AfterGet(_key, cachedValue);
+				_invalidator.OnCacheHit(_container, _query, _key, cachedValue);
 				return ((IEnumerable<TType>)cachedValue).GetEnumerator();
 			}
 
 			// If not cached, cache item.
 			var value = _query.ToArray();
+			_invalidator.OnCacheMiss(_container, _query, _key, cachedValue);
 
 			// Cache item.
-			if (_container.SupportsDurationInvalidation && _invalidator.SupportsDuration)
+			if (_container.SupportsDurationInvalidation && _invalidator.UsesDuration)
 			{
 				_container.Set(_key, value, _invalidator.Duration);
 			}
@@ -75,13 +71,7 @@ namespace LinqCache
 
 		public void Invalidate()
 		{
-			// Data is not retrieved from source then _key is null and we cannot remove an item that is not cached.
-			if (_key == null)
-			{
-				return;
-			}
-
-			_container.Remove(_key);			
+			_container.Delete(_key);			
 		}
 	}
 }

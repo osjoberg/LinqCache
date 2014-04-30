@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using LinqCache.Containers;
 using LinqCache.Invalidators;
 using Moq;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace LinqCache.Test
 			query.AsCached().ToArray();
 			query.AsCached(invalidatorMock.Object).ToArray();
 
-			invalidatorMock.Verify(mock => mock.AfterGet(It.IsAny<string>(), It.IsAny<object>()), Times.Once);
+			invalidatorMock.Verify(mock => mock.OnCacheHit(It.IsAny<Container>(), It.IsAny<IQueryable>(), It.IsAny<string>(), It.IsAny<object>()), Times.Once);
 		}
 
 

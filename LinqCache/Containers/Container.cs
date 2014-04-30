@@ -42,11 +42,11 @@ namespace LinqCache.Containers
 		/// Called internally by LinqCache to remove an item from the cache.
 		/// </summary>
 		/// <param name="key">Cache key.</param>
-		public abstract void Remove(string key);
+		public abstract void Delete(string key);
 
 		/// <summary>
 		/// Called internally by LinqCache to remove all items from the cache.
 		/// </summary>
-		public abstract void RemoveAll();
+		public abstract void Clear();
 	}
 }

@@ -5,9 +5,6 @@ namespace LinqCache
 {
 	public class LinqCacheConfiguration
 	{
-		private Container _container;
-		private Invalidator _invalidator;
-
 		public static LinqCacheConfiguration Default
 		{
 			get { return new LinqCacheConfiguration(new MemoryCacheContainer(), new ManualInvalidator());   }			
@@ -19,24 +16,8 @@ namespace LinqCache
 			Container = container;
 		}
 
-		public Container Container
-		{
-			get { return _container; }
-			set
-			{
-				_container = value;
-				Invalidator.Container = value;
-			}
-		}
+		public Container Container { get; set; }
 
-		public Invalidator Invalidator
-		{
-			get { return _invalidator; }
-			set
-			{
-				_invalidator = value;
-				_invalidator.Container = Container;
-			}
-		}
+		public Invalidator Invalidator { get; set; }
 	}
 }

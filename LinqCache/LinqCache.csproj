@@ -39,9 +39,12 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Caching" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArgumentValidator.cs" />
     <Compile Include="Containers\MemoryCacheContainer.cs" />
     <Compile Include="Containers\Container.cs" />
     <Compile Include="CachedEnumerable.cs" />
@@ -50,6 +53,7 @@
     <Compile Include="Invalidators\DateTimeInvalidator.cs" />
     <Compile Include="Invalidators\DurationInvalidator.cs" />
     <Compile Include="Invalidators\Invalidator.cs" />
+    <Compile Include="Invalidators\SqlDependencyInvalidator.cs" />
     <Compile Include="LinqCacheException.cs" />
     <Compile Include="QueryableExtension.cs" />
     <Compile Include="Evaluator.cs" />

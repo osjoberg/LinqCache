@@ -59,12 +59,12 @@ namespace LinqCache.Containers
 			return isCached;
 		}
 
-		public override void Remove(string key)
+		public override void Delete(string key)
 		{
 			_memoryCache.Remove(key);
 		}
 
-		public override void RemoveAll()
+		public override void Clear()
 		{
 			foreach (var item in _memoryCache)
 			{

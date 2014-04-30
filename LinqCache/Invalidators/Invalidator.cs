@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using LinqCache.Containers;
 
 namespace LinqCache.Invalidators
@@ -9,15 +10,34 @@ namespace LinqCache.Invalidators
 	public abstract class Invalidator
 	{
 		/// <summary>
-		/// Acccess to container.
+		/// On initialization of the invalidator.
 		/// </summary>
-		internal protected Container Container { get; set; }
+		internal protected virtual void OnInit(Container container, IQueryable query, string key)
+		{			
+		}
 
-		internal protected virtual void AfterGet(string key, object cachedValue)
+		/// <summary>
+		/// After a cache hit has occured.
+		/// </summary>
+		internal protected virtual void OnCacheHit(Container container, IQueryable query, string key, object cachedValue)
 		{
 		}
 
-		internal protected TimeSpan Duration { get; protected set; }
-		internal protected bool SupportsDuration { get; protected set; }
+		/// <summary>
+		/// After a cache miss has occured.
+		/// </summary>
+		internal protected virtual void OnCacheMiss(Container container, IQueryable query, string key, object value)
+		{			
+		}
+
+		/// <summary>
+		/// If the invalidator uses duration.
+		/// </summary>
+		internal protected bool UsesDuration { get; protected set; }
+
+		/// <summary>
+		/// Duration until invalidation occurs if invalidator uses duration.
+		/// </summary>
+		internal protected TimeSpan Duration { get; protected set; }		
 	}
 }
