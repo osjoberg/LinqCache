@@ -25,13 +25,19 @@ namespace LinqCache
 			
 			// for any local collection parameters in the method, make a
 			// replacement argument which will print its elements
-			var replacements = (from x in map
-								where x.Param != null && x.Param.IsGenericType
-								let g = x.Param.GetGenericTypeDefinition()
-								where g == typeof(IEnumerable<>) || g == typeof(List<>)
-								where x.Arg.NodeType == ExpressionType.Constant
-								let elementType = x.Param.GetGenericArguments().Single()
-								select new { x.Arg, Replacement = Expression.Constant("{" + string.Join("|", (IEnumerable)((ConstantExpression)x.Arg).Value) + "}") }).ToList();
+			var replacements = (map.Where(x => x.Param != null && x.Param.IsGenericType)
+				.Select(x => new {x, g = x.Param.GetGenericTypeDefinition()})
+				.Where(@t => @t.g == typeof (IEnumerable<>) || @t.g == typeof (List<>))
+				.Where(@t => @t.x.Arg.NodeType == ExpressionType.Constant)
+				.Select(@t => new {@t, elementType = @t.x.Param.GetGenericArguments().Single()})
+				.Select(
+					@t =>
+						new
+						{
+							@t.@t.x.Arg,
+							Replacement =
+								Expression.Constant("{" + string.Join("|", (IEnumerable) ((ConstantExpression) @t.@t.x.Arg).Value) + "}")
+						})).ToList();
 
 			if (replacements.Any())
 			{
