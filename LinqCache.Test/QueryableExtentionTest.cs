@@ -10,11 +10,6 @@ namespace LinqCache.Test
 	[TestClass]
 	public class QueryableExtentionTest
 	{
-		[TestInitialize]
-		public void Initialize()
-		{
-		}
-
 		[TestMethod]
 		public void AsCached_CachesData()
 		{
