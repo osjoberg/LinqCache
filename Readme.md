@@ -71,3 +71,26 @@ You can change the default configuration by modifying the LinqCacheConfiguration
 Credits
 -------
 Expression parsing is based on: http://petemontgomery.wordpress.com/2008/08/07/caching-the-results-of-linq-queries/ by Pete Montgomery.
+
+
+Version 0.1.0
+-------------
++ Initial version.
+
+Version 0.1.1:
+--------------
++ Minor fixes.
+
+Version 0.1.2:
+--------------
++ Fixed broken SqlDependency LinqToSql support
++ Detect unsupported queries for SqlDependency
++ Detect changetracking not running for SqlDependency
++ Invalidator.OnInit should only execute once
++ Patching of context should be done on every request if neccessary
+
+Fututure:
+---------
++ Entity framework support for SqlDependency
++ Proper support for caching of scalar queries
++ Proper support for pre compiled queries
