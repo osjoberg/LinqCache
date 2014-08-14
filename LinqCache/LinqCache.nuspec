@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>$id$</id>
+        <version>$version$</version>
+        <title>$id$</title>
+        <iconUrl>http://oskarsjoberg.se/LinqCache.png</iconUrl>
+        <authors>$author$</authors>
+        <owners />
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <summary>LinqCache is a simple yet poweful framework for caching LINQ queries. The framework works seamlessly wheter the backing data store is objects, XML, LINQ-to-SQL, Entity Framework, NHibernate or any other LINQ enabled provider. You can also extend the frame work with your own custom cache containers or custom cache invalidation rules.</summary>
+		<description>$description$</description>
+	</metadata>
+</package>
