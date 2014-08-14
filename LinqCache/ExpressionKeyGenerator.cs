@@ -4,9 +4,9 @@ using System.Linq.Expressions;
 
 namespace LinqCache
 {
-	internal class ExpressionKeyGenerator
+	internal static class ExpressionKeyGenerator
 	{
-		public string GetKey(Expression expression)
+		public static string GetKey(Expression expression)
 		{
 			// locally evaluate as much of the query as possible
 			expression = Evaluator.PartialEval(expression, CanBeEvaluatedLocally);

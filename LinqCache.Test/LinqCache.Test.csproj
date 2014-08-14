@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Containers\MemoryCacheContainerTests.cs" />
     <Compile Include="Invalidators\DateTimeInvalidatorTests.cs" />
+    <Compile Include="Invalidators\SqlDependencyInvalidatorTest.cs" />
     <Compile Include="LinqToSql.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -81,6 +82,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="LinqCache.snk" />
     <None Include="LinqToSql.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
@@ -96,6 +98,15 @@
     <None Include="LinqToSql.dbml.layout">
       <DependentUpon>LinqToSql.dbml</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LinqToSqlDatabase.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LinqToSqlDatabase_log.ldf">
+      <DependentUpon>LinqToSqlDatabase.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

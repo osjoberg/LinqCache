@@ -48,6 +48,8 @@
     <Compile Include="Containers\MemoryCacheContainer.cs" />
     <Compile Include="Containers\Container.cs" />
     <Compile Include="CachedEnumerable.cs" />
+    <Compile Include="Invalidators\SqlDependency\CustomMetaModel.cs" />
+    <Compile Include="Invalidators\SqlDependency\CustomMetaTable.cs" />
     <Compile Include="Invalidators\ManualInvalidator.cs" />
     <Compile Include="Invalidators\SlidingDurationInvalidator.cs" />
     <Compile Include="Invalidators\DateTimeInvalidator.cs" />
@@ -64,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="LinqCache.snk" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

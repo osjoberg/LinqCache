@@ -29,10 +29,14 @@ namespace LinqCache
 			_invalidator = invalidator;
 
 			// Get key from query.
-			var expressionKeyGenerator = new ExpressionKeyGenerator();
-			_key = expressionKeyGenerator.GetKey(_query.Expression);
+			_key = ExpressionKeyGenerator.GetKey(_query.Expression);
 
-			_invalidator.OnInit(container, _query, _key);
+			if (_invalidator.IsInitialized == false)
+			{
+				_invalidator.OnInit(container, _query, _key);
+				_invalidator.IsInitialized = true;
+			}
+			
 		}
 
 		public IEnumerator<TType> GetEnumerator()
@@ -48,9 +52,9 @@ namespace LinqCache
 			}
 
 			// If not cached, cache item.
+			_invalidator.OnCacheMiss(_container, _query, _key);
 			var value = _query.ToArray();
-			_invalidator.OnCacheMiss(_container, _query, _key, cachedValue);
-
+			
 			// Cache item.
 			if (_container.SupportsDurationInvalidation && _invalidator.UsesDuration)
 			{
@@ -60,6 +64,8 @@ namespace LinqCache
 			{
 				_container.Set(_key, value);
 			}
+
+			_invalidator.OnCacheRefresh(_container, _query, _key, value);
 
 			return ((IEnumerable<TType>)value).GetEnumerator();
 		}

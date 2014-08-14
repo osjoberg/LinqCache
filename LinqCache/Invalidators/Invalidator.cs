@@ -26,8 +26,15 @@ namespace LinqCache.Invalidators
 		/// <summary>
 		/// After a cache miss has occured.
 		/// </summary>
-		internal protected virtual void OnCacheMiss(Container container, IQueryable query, string key, object value)
-		{			
+		internal protected virtual void OnCacheMiss(Container container, IQueryable query, string key)
+		{
+		}
+
+		/// <summary>
+		/// After a value has been refreshed.
+		/// </summary>
+		internal protected virtual void OnCacheRefresh(Container container, IQueryable query, string key, object value)
+		{
 		}
 
 		/// <summary>
@@ -39,5 +46,7 @@ namespace LinqCache.Invalidators
 		/// Duration until invalidation occurs if invalidator uses duration.
 		/// </summary>
 		internal protected TimeSpan Duration { get; protected set; }		
+
+		internal bool IsInitialized { get; set; }
 	}
 }
