@@ -37,7 +37,7 @@ You can also extend the frame work with your own custom cache containers or cust
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.1.2.0")]
-[assembly: AssemblyFileVersion("0.1.2.0")]
+[assembly: AssemblyVersion("0.1.3.0")]
+[assembly: AssemblyFileVersion("0.1.3.0")]
 [assembly: CLSCompliant(true)]
 [assembly: InternalsVisibleTo("LinqCache.Test, PublicKey=00240000048000009400000006020000002400005253413100040000010001005ba4b82d98ef19e804c7a53988d8ab03ca23a2e16db4ac69eae7879f0852e2d186bd5f1a80453005147a774791468f6a416248804b44a15a6b039788048c5136ba44f65fb71d91e00a8ec012b1757d3793dc2d0763bd416267cdc5b7e606e85037ff2be7338bbf1d2856274d4bc7abf2c088305b9f02619261760489c5b303b8")]
