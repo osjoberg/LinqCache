@@ -10,6 +10,9 @@ To install LinqCache, run the following command in the Package Manager Console:
 ```
 PM> Install-Package LinqCache
 ```
+
+You can also view the [package page](http://www.nuget.org/packages/LinqCache/) on NuGet.
+
 Examples
 --------
 + Cache LINQ to objects query indefinitely
