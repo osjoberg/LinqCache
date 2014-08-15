@@ -12,12 +12,12 @@ PM> Install-Package LinqCache
 ```
 Examples
 --------
-+ Cache LINQ to objects query indefinetly
++ Cache LINQ to objects query indefinitely
 ```C#
 var query = customers.Where(customer => customer.Name == "John").AsCached();
 ```
 
-+ Cache LINQ to sql query indefinetly
++ Cache LINQ to sql query indefinitely
 ```C#
 using (var context = new MyDbContext())
 {
@@ -87,6 +87,14 @@ Version history
 + Detect changetracking not running for SqlDependency
 + Invalidator.OnInit should only execute once
 + Patching of context should be done on every request if neccessary
+
+**Version 0.1.3**
++ Removed unused EntityFramework dependency
+
+**Version 0.1.4**
++ Removed added cache key support
++ Added benchmark tests
+
 
 **Future**
 + Entity framework support for SqlDependency

@@ -63,6 +63,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Benchmark.cs" />
     <Compile Include="Containers\MemoryCacheContainerTests.cs" />
     <Compile Include="Invalidators\DateTimeInvalidatorTests.cs" />
     <Compile Include="Invalidators\SqlDependencyInvalidatorTest.cs" />
@@ -82,7 +83,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="LinqCache.snk" />
     <None Include="LinqToSql.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
