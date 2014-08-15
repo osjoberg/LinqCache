@@ -65,6 +65,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="LinqCache.nuspec" />
     <None Include="LinqCache.snk" />
   </ItemGroup>
   <ItemGroup />

@@ -9,6 +9,9 @@
         <owners />
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <summary>LinqCache is a simple yet poweful framework for caching LINQ queries. The framework works seamlessly wheter the backing data store is objects, XML, LINQ-to-SQL, Entity Framework, NHibernate or any other LINQ enabled provider. You can also extend the frame work with your own custom cache containers or custom cache invalidation rules.</summary>
-		<description>$description$</description>
+				<description>$description$</description>
+				<licenseUrl>https://github.com/osjoberg/LinqCache/blob/master/License.txt</licenseUrl>
+				<projectUrl>https://github.com/osjoberg/LinqCache</projectUrl>
+				<tags>linq cache</tags>
 	</metadata>
 </package>
