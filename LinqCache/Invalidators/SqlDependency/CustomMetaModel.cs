@@ -4,7 +4,7 @@ using System.Data.Linq.Mapping;
 
 namespace LinqCache.Invalidators.SqlDependency
 {
-	internal class CustomMetaModel : MetaModel
+	class CustomMetaModel : MetaModel
 	{
 		private readonly MetaModel _model;
 

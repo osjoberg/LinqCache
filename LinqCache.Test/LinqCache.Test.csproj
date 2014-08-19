@@ -42,10 +42,17 @@
     <AssemblyOriginatorKeyFile>LinqCache.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Caching" />
@@ -63,18 +70,24 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Benchmark.cs" />
+    <Compile Include="BenchmarkTest.cs" />
     <Compile Include="Containers\MemoryCacheContainerTests.cs" />
-    <Compile Include="Invalidators\DateTimeInvalidatorTests.cs" />
-    <Compile Include="Invalidators\SqlDependencyInvalidatorTest.cs" />
-    <Compile Include="LinqToSql.designer.cs">
+    <Compile Include="EntityFramework\DbSetExtenstions.cs" />
+    <Compile Include="EntityFramework\EntityFrameworkContext.cs" />
+    <Compile Include="EntityFramework\TestTable1.cs" />
+    <Compile Include="Invalidators\EntityFrameworkSqlDependencyInvalidatorTest.cs" />
+    <Compile Include="Invalidators\DateTimeInvalidatorTest.cs" />
+    <Compile Include="Invalidators\LinqToSqlSqlDependencyInvalidatorTest.cs" />
+    <Compile Include="LinqToSql\LinqToSql.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LinqToSql.dbml</DependentUpon>
     </Compile>
+    <Compile Include="LinqToSql\LinqToSqlContext.cs" />
     <Compile Include="QueryableExtentionTest.cs" />
     <Compile Include="ExpressionKeyGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestDatabase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LinqCache\LinqCache.csproj">
@@ -83,8 +96,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="LinqCache.snk" />
-    <None Include="LinqToSql.dbml">
+    <None Include="LinqToSql\LinqToSql.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>LinqToSql.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
@@ -95,18 +109,15 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="LinqToSql.dbml.layout">
+    <None Include="LinqToSql\LinqToSql.dbml.layout">
       <DependentUpon>LinqToSql.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LinqToSqlDatabase.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LinqToSqlDatabase_log.ldf">
-      <DependentUpon>LinqToSqlDatabase.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="TestDatabase.mdf" />
+    <None Include="TestDatabase_log.ldf">
+      <DependentUpon>TestDatabase.mdf</DependentUpon>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

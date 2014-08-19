@@ -98,8 +98,9 @@ Version history
 + Removed added cache key support
 + Added benchmark tests
 
+**Version 0.1.5**
++ SqlDependencyInvalidator now supports Entity Framework
 
 **Future**
-+ Entity framework support for SqlDependency
 + Proper support for caching of scalar queries
 + Proper support for pre compiled queries

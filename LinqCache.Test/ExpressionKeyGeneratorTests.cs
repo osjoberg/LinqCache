@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using System.Threading;
+using LinqCache.Test.LinqToSql;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LinqCache.Test.Keys

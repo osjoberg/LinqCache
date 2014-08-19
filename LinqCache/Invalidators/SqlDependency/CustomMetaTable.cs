@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace LinqCache.Invalidators.SqlDependency
 {
-	internal sealed class CustomMetaTable : MetaTable
+	class CustomMetaTable : MetaTable
 	{
 		private readonly MetaTable _table;
 		private readonly MetaModel _model;

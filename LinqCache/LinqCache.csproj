@@ -56,6 +56,8 @@
     <Compile Include="Invalidators\DurationInvalidator.cs" />
     <Compile Include="Invalidators\Invalidator.cs" />
     <Compile Include="Invalidators\SqlDependencyInvalidator.cs" />
+    <Compile Include="Invalidators\SqlDependency\EntityFramework.cs" />
+    <Compile Include="Invalidators\SqlDependency\LinqToSql.cs" />
     <Compile Include="LinqCacheException.cs" />
     <Compile Include="QueryableExtension.cs" />
     <Compile Include="Evaluator.cs" />
