@@ -50,12 +50,12 @@ customers.Invalidate();
 ```
 + Invalidate whole cache
 ```C#
-LinqCacheConfiguration.Container.Clear();
+LinqCacheConfiguration.Default.Container.Clear();
 ```
 
 Supported Cache Containers
 --------------------------
-+ MemoryCache, Managed in-process memory cache. (Default)
++ MemoryCacheContainer, Managed in-process memory cache. (Default)
 
 Supported Invalidation Rules
 ----------------------------

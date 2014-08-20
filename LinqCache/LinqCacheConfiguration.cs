@@ -5,9 +5,11 @@ namespace LinqCache
 {
 	public class LinqCacheConfiguration
 	{
+		private static readonly LinqCacheConfiguration InternalDefault = new LinqCacheConfiguration(new MemoryCacheContainer(), new ManualInvalidator());
+
 		public static LinqCacheConfiguration Default
 		{
-			get { return new LinqCacheConfiguration(new MemoryCacheContainer(), new ManualInvalidator());   }			
+			get { return InternalDefault;   }			
 		}
 
 		public LinqCacheConfiguration(Container container, Invalidator invalidator)

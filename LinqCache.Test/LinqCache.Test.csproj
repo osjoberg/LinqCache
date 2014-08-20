@@ -78,6 +78,7 @@
     <Compile Include="Invalidators\EntityFrameworkSqlDependencyInvalidatorTest.cs" />
     <Compile Include="Invalidators\DateTimeInvalidatorTest.cs" />
     <Compile Include="Invalidators\LinqToSqlSqlDependencyInvalidatorTest.cs" />
+    <Compile Include="LinqCacheConfigurationTest.cs" />
     <Compile Include="LinqToSql\LinqToSql.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
