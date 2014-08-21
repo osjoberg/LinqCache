@@ -45,9 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArgumentValidator.cs" />
+    <Compile Include="LinqCacheQueryProvider.cs" />
+    <Compile Include="LinqCacheQueryable.cs" />
     <Compile Include="Containers\MemoryCacheContainer.cs" />
     <Compile Include="Containers\Container.cs" />
-    <Compile Include="CachedEnumerable.cs" />
     <Compile Include="Invalidators\SqlDependency\CustomMetaModel.cs" />
     <Compile Include="Invalidators\SqlDependency\CustomMetaTable.cs" />
     <Compile Include="Invalidators\ManualInvalidator.cs" />

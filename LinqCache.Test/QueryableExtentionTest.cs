@@ -20,8 +20,22 @@ namespace LinqCache.Test
 
 			data.Clear();
 
+			Assert.AreEqual(1, query.ToList().Count);
+		}
+
+		[TestMethod]
+		public void AsCached_CachesScalarData()
+		{
+			var data = new[] { new { Te2st = "value" } }.ToList();
+			var query = data.Where(item => item.Te2st == "value").AsQueryable().AsCached();
+
+			query.Count();
+
+			data.Clear();
+
 			Assert.AreEqual(1, query.Count());
 		}
+
 
 		[TestMethod]
 		public void AsCached_NotifysInvalidatonAfterGet()

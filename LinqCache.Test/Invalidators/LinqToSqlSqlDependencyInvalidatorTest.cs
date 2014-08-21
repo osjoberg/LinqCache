@@ -27,14 +27,14 @@ namespace LinqCache.Test.Invalidators
 			using (var context = new LinqToSqlContext())
 			using (var invalidator = new SqlDependencyInvalidator())
 			{
-				Assert.AreEqual(0, context.TestTable1s.AsCached(invalidator).Count());
+				Assert.AreEqual(0, context.TestTable1s.AsCached(invalidator).ToList().Count);
 
 				context.TestTable1s.InsertOnSubmit(new TestTable1 {Column = "Column", Id = 1});
 				context.SubmitChanges();
 
 				invalidator.OnChangeReceived.WaitOne();
 
-				Assert.AreEqual(1, context.TestTable1s.AsCached(invalidator).Count());
+				Assert.AreEqual(1, context.TestTable1s.AsCached(invalidator).ToList().Count);
 			}
 		}
 
@@ -44,20 +44,20 @@ namespace LinqCache.Test.Invalidators
 			using (var context = new LinqToSqlContext())
 			using (var invalidator = new SqlDependencyInvalidator())
 			{
-				Assert.AreEqual(0, context.TestTable1s.AsCached(invalidator).Count());
+				Assert.AreEqual(0, context.TestTable1s.AsCached(invalidator).ToList().Count);
 
 				context.TestTable1s.InsertOnSubmit(new TestTable1 { Id = 1, Column = "Column" });
 				context.SubmitChanges();
 				invalidator.OnChangeReceived.WaitOne();
 
-				Assert.AreEqual(1, context.TestTable1s.AsCached(invalidator).Count());
+				Assert.AreEqual(1, context.TestTable1s.AsCached(invalidator).ToList().Count);
 
 				context.TestTable1s.InsertOnSubmit(new TestTable1 { Id = 2, Column = "Column2" });
 				context.SubmitChanges();
 
 				invalidator.OnChangeReceived.WaitOne();
 
-				Assert.AreEqual(2, context.TestTable1s.AsCached(invalidator).Count());
+				Assert.AreEqual(2, context.TestTable1s.AsCached(invalidator).ToList().Count);
 			}
 		}
 
@@ -68,7 +68,7 @@ namespace LinqCache.Test.Invalidators
 			{
 				using (var context = new LinqToSqlContext())
 				{
-					Assert.AreEqual(0, context.TestTable1s.AsCached(invalidator).Count());
+					Assert.AreEqual(0, context.TestTable1s.AsCached(invalidator).ToList().Count);
 				}
 
 				using (var context = new LinqToSqlContext())
@@ -78,7 +78,7 @@ namespace LinqCache.Test.Invalidators
 
 					invalidator.OnChangeReceived.WaitOne();
 
-					Assert.AreEqual(1, context.TestTable1s.AsCached(invalidator).Count());
+					Assert.AreEqual(1, context.TestTable1s.AsCached(invalidator).ToList().Count);
 				}
 			}
 		}

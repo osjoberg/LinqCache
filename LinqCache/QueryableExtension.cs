@@ -6,39 +6,39 @@ namespace LinqCache
 {
 	public static class QueryableExtension
 	{
-		public static CachedEnumerable<TType> AsCached<TType>(this IQueryable<TType> query)
+		public static LinqCacheQueryable<TType> AsCached<TType>(this IQueryable<TType> query) where TType : class
 		{
-			return AsCached(query, ExpressionKeyGenerator.GetKey(query.Expression), LinqCacheConfiguration.Default.Container, LinqCacheConfiguration.Default.Invalidator);
+			return AsCached(query, null, LinqCacheConfiguration.Default.Container, LinqCacheConfiguration.Default.Invalidator);
 		}
 
-		public static CachedEnumerable<TType> AsCached<TType>(this IQueryable<TType> query, Container container)
+		public static LinqCacheQueryable<TType> AsCached<TType>(this IQueryable<TType> query, Container container) where TType : class
 		{
-			return AsCached(query, ExpressionKeyGenerator.GetKey(query.Expression), container, LinqCacheConfiguration.Default.Invalidator);
+			return AsCached(query, null, container, LinqCacheConfiguration.Default.Invalidator);
 		}
 
-		public static CachedEnumerable<TType> AsCached<TType>(this IQueryable<TType> query, Invalidator invalidator)
+		public static LinqCacheQueryable<TType> AsCached<TType>(this IQueryable<TType> query, Invalidator invalidator) where TType : class
 		{
-			return AsCached(query, ExpressionKeyGenerator.GetKey(query.Expression), LinqCacheConfiguration.Default.Container, invalidator);
+			return AsCached(query, null, LinqCacheConfiguration.Default.Container, invalidator);
 		}
 
-		public static CachedEnumerable<TType> AsCached<TType>(this IQueryable<TType> query, string cacheKey)
+		public static LinqCacheQueryable<TType> AsCached<TType>(this IQueryable<TType> query, string cacheKey) where TType : class
 		{
 			return AsCached(query, cacheKey, LinqCacheConfiguration.Default.Container, LinqCacheConfiguration.Default.Invalidator);
 		}
 
-		public static CachedEnumerable<TType> AsCached<TType>(this IQueryable<TType> query, string cacheKey, Container container)
+		public static LinqCacheQueryable<TType> AsCached<TType>(this IQueryable<TType> query, string cacheKey, Container container) where TType : class
 		{
 			return AsCached(query, cacheKey, container, LinqCacheConfiguration.Default.Invalidator);
 		}
 
-		public static CachedEnumerable<TType> AsCached<TType>(this IQueryable<TType> query, string cacheKey, Invalidator invalidator)
+		public static LinqCacheQueryable<TType> AsCached<TType>(this IQueryable<TType> query, string cacheKey, Invalidator invalidator) where TType : class
 		{
 			return AsCached(query, cacheKey, LinqCacheConfiguration.Default.Container, invalidator);
 		}
 
-		public static CachedEnumerable<TType> AsCached<TType>(this IQueryable<TType> query, string cacheKey, Container container, Invalidator invalidator)
+		public static LinqCacheQueryable<TType> AsCached<TType>(this IQueryable<TType> query, string cacheKey, Container container, Invalidator invalidator) where TType : class
 		{
-			return new CachedEnumerable<TType>(query, cacheKey, container, invalidator);
+			return new LinqCacheQueryable<TType>(query, cacheKey, container, invalidator);
 		}
 	}
 }

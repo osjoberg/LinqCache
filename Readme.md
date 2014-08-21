@@ -20,7 +20,7 @@ Examples
 var query = customers.Where(customer => customer.Name == "John").AsCached();
 ```
 
-+ Cache LINQ to sql query indefinitely
++ Cache LINQ-to-SQL / Entity Framework query indefinitely
 ```C#
 using (var context = new MyDbContext())
 {
@@ -28,14 +28,14 @@ using (var context = new MyDbContext())
 }
 ```
 
-+ Cache LINQ to sql query for ten minutes
++ Cache LINQ-to-SQL / Entity Framework query for ten minutes
 ```C#
 using (var context = new MyDbContext())
 {
 	var customers = customers.Where(customer => customer.Name.StartsWith("A")).AsCached(new DurationInvalidator(TimeSpan.FromMinutes(10));
 }
 ```
-+ Invalidate LINQ to sql query
++ Invalidate LINQ-to-SQL / Entity Framework query
 ```C#
 using (var context = new MyDbContext())
 {
@@ -85,7 +85,7 @@ Version history
 + Minor fixes
 
 **Version 0.1.2**
-+ Fixed broken SqlDependency LinqToSql support
++ Fixed broken SqlDependency LINQ-to-SQL support
 + Detect unsupported queries for SqlDependency
 + Detect changetracking not running for SqlDependency
 + Invalidator.OnInit should only execute once
@@ -95,12 +95,15 @@ Version history
 + Removed unused EntityFramework dependency
 
 **Version 0.1.4**
-+ Removed added cache key support
++ Added manual cache key support
 + Added benchmark tests
 
 **Version 0.1.5**
 + SqlDependencyInvalidator now supports Entity Framework
 
-**Future**
+**Version 0.2.0**
 + Proper support for caching of scalar queries
-+ Proper support for pre compiled queries
++ Now properly implementing IQueryable<T> and IQueryProvider
+
+**Future**
++ Proper support for pre-compiled queries
