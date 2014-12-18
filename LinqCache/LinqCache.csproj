@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArgumentValidator.cs" />
+    <Compile Include="Invalidators\SqlDependencyEventArgs.cs" />
     <Compile Include="LinqCacheQueryProvider.cs" />
     <Compile Include="LinqCacheQueryable.cs" />
     <Compile Include="Containers\MemoryCacheContainer.cs" />

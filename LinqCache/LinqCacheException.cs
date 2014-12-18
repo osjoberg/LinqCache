@@ -12,11 +12,7 @@ namespace LinqCache
 		{
 		}
 
-
-
 		internal static LinqCacheException ContextIsNotSupported { get { return new LinqCacheException("Current context is not supported by the SqlDependencyInvalidator."); } }
-		internal static LinqCacheException ContainerDoesNotSupportDuration { get { return new LinqCacheException("Container does not support duration invalidation."); } }
 		internal static LinqCacheException BrokerIsNotEnabled(InvalidOperationException innerException) { return new LinqCacheException("The SQL Server Service Broker for the current database is not enabled.", innerException); }
-
 	}
 }

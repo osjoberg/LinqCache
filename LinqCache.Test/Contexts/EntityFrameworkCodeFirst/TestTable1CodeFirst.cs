@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LinqCache.Test.EntityFramework
+namespace LinqCache.Test.Contexts.EntityFrameworkCodeFirst
 {
-	public class TestTable1
+    [Table("TestTable1")]
+	public class TestTable1CodeFirst
 	{
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.None)]

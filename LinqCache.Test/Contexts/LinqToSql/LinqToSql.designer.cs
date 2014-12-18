@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LinqCache.Test.LinqToSql
+namespace LinqCache.Test.Contexts.LinqToSql
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;

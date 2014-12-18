@@ -21,7 +21,7 @@ namespace LinqCache.Invalidators
 		/// </summary>
 		internal readonly AutoResetEvent OnChangeReceived = new AutoResetEvent(false);
 
-		public event EventHandler<IQueryable> UnsupportedQuery;
+		public event EventHandler<SqlDependencyEventArgs> UnsupportedQuery;
 
 		/// <summary>
 		/// Copy the connection string since the _command.Connection.ConnectionString may be reset when dispose is runned.
@@ -69,7 +69,7 @@ namespace LinqCache.Invalidators
 					var unsupportedQueryHandler = UnsupportedQuery;
 					if (unsupportedQueryHandler != null)
 					{
-						UnsupportedQuery(this, query);
+                        unsupportedQueryHandler(this, new SqlDependencyEventArgs(query));
 					}
 				}
 				else
@@ -95,6 +95,7 @@ namespace LinqCache.Invalidators
 		/// </summary>
 		public void Dispose()
 		{
+            OnChangeReceived.Dispose();
 			if (_connectionString == null)
 			{
 				return;

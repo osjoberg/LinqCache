@@ -56,6 +56,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -72,19 +75,37 @@
   <ItemGroup>
     <Compile Include="BenchmarkTest.cs" />
     <Compile Include="Containers\MemoryCacheContainerTests.cs" />
-    <Compile Include="EntityFramework\DbSetExtenstions.cs" />
-    <Compile Include="EntityFramework\EntityFrameworkContext.cs" />
-    <Compile Include="EntityFramework\TestTable1.cs" />
-    <Compile Include="Invalidators\EntityFrameworkSqlDependencyInvalidatorTest.cs" />
+    <Compile Include="Contexts\EntityFrameworkDatabaseFirst\EntityFrameworkDatabaseFirstContext.cs" />
+    <Compile Include="Contexts\EntityFrameworkDatabaseFirst\EntityFrameworkDatabaseFirst.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityFrameworkDatabaseFirst.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contexts\EntityFrameworkDatabaseFirst\EntityFrameworkDatabaseFirst.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityFrameworkDatabaseFirst.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contexts\EntityFrameworkDatabaseFirst\EntityFrameworkDatabaseFirst.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityFrameworkDatabaseFirst.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Contexts\EntityFrameworkCodeFirst\EntityFrameworkCodeFirstContext.cs" />
+    <Compile Include="Contexts\EntityFrameworkCodeFirst\TestTable1CodeFirst.cs" />
+    <Compile Include="Contexts\EntityFrameworkDatabaseFirst\TestTable1DatabaseFirst.cs">
+      <DependentUpon>EntityFrameworkDatabaseFirst.tt</DependentUpon>
+    </Compile>
     <Compile Include="Invalidators\DateTimeInvalidatorTest.cs" />
-    <Compile Include="Invalidators\LinqToSqlSqlDependencyInvalidatorTest.cs" />
+    <Compile Include="Contexts\IContext.cs" />
+    <Compile Include="Invalidators\SqlDependencyInvalidatorTest.cs" />
     <Compile Include="LinqCacheConfigurationTest.cs" />
-    <Compile Include="LinqToSql\LinqToSql.designer.cs">
+    <Compile Include="Contexts\LinqToSql\LinqToSql.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LinqToSql.dbml</DependentUpon>
     </Compile>
-    <Compile Include="LinqToSql\LinqToSqlContext.cs" />
+    <Compile Include="Contexts\LinqToSql\LinqToSqlContext.cs" />
     <Compile Include="QueryableExtentionTest.cs" />
     <Compile Include="ExpressionKeyGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,9 +118,26 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <EntityDeploy Include="Contexts\EntityFrameworkDatabaseFirst\EntityFrameworkDatabaseFirst.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EntityFrameworkDatabaseFirst.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="App.Config" />
+    <None Include="Contexts\EntityFrameworkDatabaseFirst\EntityFrameworkDatabaseFirst.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EntityFrameworkDatabaseFirst.edmx</DependentUpon>
+      <LastGenOutput>EntityFrameworkDatabaseFirst.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Contexts\EntityFrameworkDatabaseFirst\EntityFrameworkDatabaseFirst.edmx.diagram">
+      <DependentUpon>EntityFrameworkDatabaseFirst.edmx</DependentUpon>
+    </None>
+    <None Include="Contexts\EntityFrameworkDatabaseFirst\EntityFrameworkDatabaseFirst.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EntityFrameworkDatabaseFirst.edmx</DependentUpon>
+      <LastGenOutput>EntityFrameworkDatabaseFirst.cs</LastGenOutput>
+    </None>
     <None Include="LinqCache.snk" />
-    <None Include="LinqToSql\LinqToSql.dbml">
+    <None Include="Contexts\LinqToSql\LinqToSql.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>LinqToSql.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
@@ -108,16 +146,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="LinqToSql\LinqToSql.dbml.layout">
+    <None Include="Contexts\LinqToSql\LinqToSql.dbml.layout">
       <DependentUpon>LinqToSql.dbml</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="TestDatabase.mdf" />
-    <None Include="TestDatabase_log.ldf">
-      <DependentUpon>TestDatabase.mdf</DependentUpon>
     </None>
   </ItemGroup>
   <Choose>

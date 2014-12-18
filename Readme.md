@@ -1,8 +1,8 @@
 LinqCache
 =========
 LinqCache is a simple yet poweful framework for caching LINQ queries. 
-The framework works seamlessly wheter the backing data store is objects, XML, LINQ-to-SQL, Entity Framework, NHibernate or any other LINQ enabled provider. 
-You can also extend the frame work with your own custom cache containers or custom cache invalidation rules.
+The framework works seamlessly whether the backing data store is objects, XML, LINQ-to-SQL, Entity Framework, NHibernate or any other LINQ enabled provider. 
+You can also extend the framework with your own custom cache containers or custom cache invalidation rules.
 
 Install via NuGet
 -----------------
@@ -104,6 +104,9 @@ Version history
 **Version 0.2.0**
 + Proper support for caching of scalar queries
 + Now properly implementing IQueryable<T> and IQueryProvider
+
+**Version 0.2.1**
++ Added unit tests for Entity Framework Database First
 
 **Future**
 + Proper support for pre-compiled queries

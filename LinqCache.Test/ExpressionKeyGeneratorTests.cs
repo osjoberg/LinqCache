@@ -1,17 +1,17 @@
 ﻿using System.Diagnostics;
 using System.Linq;
-using LinqCache.Test.LinqToSql;
+using LinqCache.Test.Contexts.LinqToSql;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace LinqCache.Test.Keys
+namespace LinqCache.Test
 {
 	[TestClass]
 	public class ExpressionKeyGeneratorTests
 	{
 		[TestMethod]
-		public void GenerateKey_GenratesKeyForExpression()
+		public void GenerateKeyGenratesKeyForExpression()
 		{
-			var value = "7";
+			const string value = "7";
 			var expression = new[] { new { Value = "7" } }.AsQueryable().Where(i => i.Value.StartsWith(value));
 
 			var key = ExpressionKeyGenerator.GetKey(expression.Expression);
@@ -20,30 +20,31 @@ namespace LinqCache.Test.Keys
 		}
 
 		[TestMethod]
-		public void GenerateKey_GenratesUniqueKeysForSameExpressionOnDifferentTablesInLinqToSql()
+		public void GenerateKeyGenratesUniqueKeysForSameExpressionOnDifferentTablesInLinqToSql()
 		{
-			var context = new LinqToSqlContext("");
-
-			var key1 = ExpressionKeyGenerator.GetKey(context.TestTable1s.Where(row => row.Column == "test").Expression);
-			var key2 = ExpressionKeyGenerator.GetKey(context.TestTable2s.Where(row => row.Column == "test").Expression);
-
-			Assert.AreNotEqual(key1, key2);
+		    using (var context = new LinqToSqlContext(TestDatabase.ConnectionString))
+		    {
+                var key1 = ExpressionKeyGenerator.GetKey(context.TestTable1s.Where(row => row.Column == "test").Expression);
+                var key2 = ExpressionKeyGenerator.GetKey(context.TestTable2s.Where(row => row.Column == "test").Expression);
+            
+                Assert.AreNotEqual(key1, key2);
+            }
 		}
 
 		[TestMethod]
 		public void GetKeyPerformance()
 		{
-			var context = new LinqToSqlContext("");
+		    using (var context = new LinqToSqlContext(TestDatabase.ConnectionString))
+		    {		        
+			    Stopwatch watch = Stopwatch.StartNew();
+			    for (int i = 0; i < 100000; i++)
+			    {
+				    ExpressionKeyGenerator.GetKey(context.TestTable1s.Where(row => row.Column == "test").Expression);
+			    }
+			    watch.Stop();
 
-			Stopwatch watch = Stopwatch.StartNew();
-			for (int i = 0; i < 100000; i++)
-			{
-				ExpressionKeyGenerator.GetKey(context.TestTable1s.Where(row => row.Column == "test").Expression);
-			}
-			watch.Stop();
-
-			Trace.WriteLine((int)(100000 / watch.Elapsed.TotalSeconds) + " key lookups per second." );
-		}
-
+			    Trace.WriteLine((int)(100000 / watch.Elapsed.TotalSeconds) + " key lookups per second." );
+            }
+        }
 	}
 }

@@ -8,7 +8,7 @@ namespace LinqCache.Test.Invalidators
 	public class DateTimeInvalidatorTest
 	{
 		[TestMethod]
-		public void Ctor_SetsDurationCorrectly()
+		public void CtorSetsDurationCorrectly()
 		{
 			var invalidate = DateTime.Now.AddHours(1);
 

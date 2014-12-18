@@ -1,0 +1,5 @@
+*.user
+*.config
+Debug
+Obj
+*.suo
