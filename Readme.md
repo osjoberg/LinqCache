@@ -17,14 +17,18 @@ Examples
 --------
 + Cache LINQ to objects query indefinitely
 ```C#
-var query = customers.Where(customer => customer.Name == "John").AsCached();
+var query = customers
+	.Where(customer => customer.Name == "John")
+	.AsCached();
 ```
 
 + Cache LINQ-to-SQL / Entity Framework query indefinitely
 ```C#
 using (var context = new MyDbContext())
 {
-	var customers = customers.Where(customer => customer.Name.StartsWith("A").AsCached());
+	var customers = context.Customers
+		.Where(customer => customer.Name.StartsWith("A")
+		.AsCached());
 }
 ```
 
@@ -32,21 +36,24 @@ using (var context = new MyDbContext())
 ```C#
 using (var context = new MyDbContext())
 {
-	var customers = customers.Where(customer => customer.Name.StartsWith("A")).AsCached(new DurationInvalidator(TimeSpan.FromMinutes(10));
+	var customers = context.Customers
+		.Where(customer => customer.Name.StartsWith("A"))
+		.AsCached(new DurationInvalidator(TimeSpan.FromMinutes(10));
 }
 ```
 + Invalidate LINQ-to-SQL / Entity Framework query
 ```C#
 using (var context = new MyDbContext())
 {
-	var customers = customers.Where(customer => customer.Name.StartsWith("A").AsCached());
+	var customers = context.Customers
+		.Where(customer => customer.Name.StartsWith("A")
+		.AsCached());
+	.
+	.
+	.
+	customers.Invalidate();
 }
 
-.
-.
-.
-
-customers.Invalidate();
 ```
 + Invalidate whole cache
 ```C#

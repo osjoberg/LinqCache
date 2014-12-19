@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("LinqCache")]
 [assembly: AssemblyDescription(@"
 LinqCache is a simple yet poweful framework for caching LINQ queries. 
-The framework works seamlessly wheter the backing data store is objects, XML, LINQ-to-SQL, Entity Framework, NHibernate or any other LINQ enabled provider. 
-You can also extend the frame work with your own custom cache containers or custom cache invalidation rules.")]
+The framework works seamlessly whether the backing data store is objects, XML, LINQ-to-SQL, Entity Framework, NHibernate or any other LINQ enabled provider. 
+You can also extend the framework with your own custom cache containers or custom cache invalidation rules.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Oskar Sjöberg")]
 [assembly: AssemblyProduct("LinqCache")]
