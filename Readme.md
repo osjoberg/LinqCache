@@ -115,5 +115,10 @@ Version history
 **Version 0.2.1**
 + Added unit tests for Entity Framework Database First
 
+**Version 0.2.2**
++ Removed uneccessary class constraint
++ Added support for caching of projections
+
 **Future**
 + Proper support for pre-compiled queries
++ Support for distributed caching via REDIS or some other established key/value storage engine
