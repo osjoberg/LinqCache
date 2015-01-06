@@ -41,6 +41,18 @@ namespace LinqCache
 				return Visit(exp);
 			}
 
+            // Solves the projection problem, https://github.com/loresoft/EntityFramework.Extended/issues/19 
+            // and https://github.com/osjoberg/LinqCache/issues/3, thank you @agnauck and @geriadejes.
+            protected override Expression VisitMemberInit(MemberInitExpression node)
+            {
+                if (node.NewExpression.NodeType == ExpressionType.New)
+                {
+                    return node;
+                }
+
+                return base.VisitMemberInit(node);
+            }
+
 			public override Expression Visit(Expression exp)
 			{
 				if (exp == null)

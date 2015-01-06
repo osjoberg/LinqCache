@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using LinqCache.Test.Contexts.LinqToSql;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -8,6 +7,11 @@ namespace LinqCache.Test
 	[TestClass]
 	public class ExpressionKeyGeneratorTests
 	{
+        private class Test
+        {
+            public string Value { get; set; }
+        }
+
 		[TestMethod]
 		public void GenerateKeyGenratesKeyForExpression()
 		{
@@ -31,20 +35,15 @@ namespace LinqCache.Test
             }
 		}
 
-		[TestMethod]
-		public void GetKeyPerformance()
-		{
-		    using (var context = new LinqToSqlContext(TestDatabase.ConnectionString))
-		    {		        
-			    Stopwatch watch = Stopwatch.StartNew();
-			    for (int i = 0; i < 100000; i++)
-			    {
-				    ExpressionKeyGenerator.GetKey(context.TestTable1s.Where(row => row.Column == "test").Expression);
-			    }
-			    watch.Stop();
+        [TestMethod]
+        public void GenerateKeyGeneratesKeysForProjection()
+        {
+            const string value = "7";
+            var expression = new[] { new { Value = "7" } }.AsQueryable().Where(i => i.Value.StartsWith(value)).Select(i => new Test {Value = i.Value});
 
-			    Trace.WriteLine((int)(100000 / watch.Elapsed.TotalSeconds) + " key lookups per second." );
-            }
+            var key = ExpressionKeyGenerator.GetKey(expression.Expression);
+
+            Assert.AreEqual(@"<>f__AnonymousType2`1[System.String][].Where(i => i.Value.StartsWith(""7"")).Select(i => new Test() {Value = i.Value})", key);
         }
 	}
 }
