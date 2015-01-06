@@ -8,7 +8,7 @@ using LinqCache.Invalidators;
 
 namespace LinqCache
 {
-	public class LinqCacheQueryable<TType> : IQueryable<TType> where TType : class
+	public class LinqCacheQueryable<TType> : IQueryable<TType>
 	{
 		private readonly IQueryable<TType> _query;
 		private readonly LinqCacheQueryProvider<TType> _provider;
