@@ -48,7 +48,6 @@ namespace LinqCache
 			return InternalExcecute(expression, () => _query.Provider.Execute(expression));
 		}
 
-
 		internal object InternalExcecute(Expression expression, Func<object> getValue)
 		{
 			var cacheKey = _cacheKey ?? ExpressionKeyGenerator.GetKey(expression);
