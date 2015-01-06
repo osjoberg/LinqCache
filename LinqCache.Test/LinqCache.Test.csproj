@@ -153,6 +153,12 @@
       <DependentUpon>LinqToSql.dbml</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestDatabase.mdf" />
+    <Content Include="TestDatabase_log.ldf">
+      <DependentUpon>TestDatabase.mdf</DependentUpon>
+    </Content>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
