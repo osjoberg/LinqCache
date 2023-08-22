@@ -13,6 +13,11 @@ namespace LinqCache.Containers
 		/// </summary>
 		private readonly MemoryCache _memoryCache;
 
+  		/// <summary>
+        	/// MemoryCache does not allow storing null values
+        	/// </summary>
+  		private readonly Object _nullObject = new object();
+
 		/// <summary>
 		/// Initializes a new instance of the MemoryCacheContainer.
 		/// </summary>
@@ -40,11 +45,13 @@ namespace LinqCache.Containers
 
 		public override void Set(string key, object value)
 		{
+		  	if (value == null) value = _nullObject;
 			_memoryCache.Set(key, value, null);
 		}
 
 		public override void Set(string key, object value, TimeSpan duration)
 		{
+  			if (value == null) value = _nullObject;
 			var absoluteExperiation = DateTimeOffset.Now + duration;
 			_memoryCache.Set(key, value, absoluteExperiation);
 		}
@@ -56,6 +63,8 @@ namespace LinqCache.Containers
 			var isCached = cacheItem != null;
 
 			value = isCached ? cacheItem.Value : null;
+   			if (value == _nullObject) value = null;
+      
 			return isCached;
 		}
 
