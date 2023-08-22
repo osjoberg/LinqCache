@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.Caching;
 
 namespace LinqCache.Containers
