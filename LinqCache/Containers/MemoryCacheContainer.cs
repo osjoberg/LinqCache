@@ -63,7 +63,7 @@ namespace LinqCache.Containers
 			var isCached = cacheItem != null;
 
 			value = isCached ? cacheItem.Value : null;
-   			if (value == _nullObject) value = null;
+   			if (Object.ReferenceEquals(value, _nullObject)) value = null;
       
 			return isCached;
 		}
